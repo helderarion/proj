@@ -1,31 +1,21 @@
-import React from "react"
-import Home from "../pages/home.page"
+import React,{useState} from "react";
+import Home from "../pages/home.page";
+import BookForm from './BookForm';
+import BookList from '../BookList';
+import {Book} from '../interfaces/book.interface';
 
 const Principal = () => {
+    const [books, setBooks] = useState<Book[]>([]);
+    const addBook = (book: Book) => {
+        setBooks((prevBooks) => [...prevBooks, book]);
+    };
     return (
-        <main className="principal">
-             <h2> Últimos lançamentos</h2>
-            <div className="card">
-                <div className="thumb">
-                    <img src="" alt="" />
-                </div>
-            <div className="detalhes">
-                <h3> Padrões para Kubernetes</h3>
-                    <p> O modo como os....</p>
-                <a href="#">Ler mais</a>
-             </div>
-             </div>
-            <div className="card">
-                <div className="thumb">
-                    <img src="" alt="" />
-                </div>
-                <div className="detalhes">
-                    <h3> Introdução ao Pentest - 2° Edição</h3>
-                    <p> Introdução ao Pentest</p>
-                    <a href="#">Ler mais</a>
-                </div>
-            </div>
-        </main>
-    )
-}
+        <div className="App">
+            <h1>Cadastro de livros</h1>
+            <BookForm onAddBook={addBook} />
+            <BookList books={books} />
+        </div>
+    );
+};
+   
 export default Principal
